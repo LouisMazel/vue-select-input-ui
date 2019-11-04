@@ -11,6 +11,7 @@
       'is-dark': dark
     }, size]"
     class="select-input-ui"
+    @click="focusInput"
   >
     <input
       :id="id"
@@ -131,7 +132,7 @@
           : null
       },
       labelShown () {
-        const valueSelected = this.options.filter(c => c.value === this.tmpValue)[0]
+        const valueSelected = this.options.filter(c => c.value === this.value)[0]
         return valueSelected ? valueSelected.label : null
       }
     },
@@ -144,12 +145,6 @@
       focusInput () {
         this.$refs.SelectInputUiInput.focus()
       },
-      blurInput (e) {
-        this.$nextTick(() => {
-          this.closeList()
-          this.$emit('blur')
-        })
-      },
       openList () {
         if (!this.disabled) {
           this.$emit('focus')
@@ -160,13 +155,14 @@
         }
       },
       closeList () {
+        this.$refs.SelectInputUiInput.blur()
         this.$emit('blur')
         this.isFocus = false
       },
       updateValue (val) {
-        this.isFocus = false
         this.tmpValue = val
         this.$emit('input', val)
+        this.closeList()
       },
       scrollToSelectedOnFocus (arrayIndex) {
         this.$nextTick(() => {
@@ -193,6 +189,7 @@
           // enter key
           this.updateValue(this.tmpValue)
         } else if (code === 27) {
+          // escape key
           this.closeList()
         } else {
           // typing an option's name
