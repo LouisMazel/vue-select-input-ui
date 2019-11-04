@@ -43,9 +43,9 @@
       />
 
       <VueSelectInputUi
-        id="VueSelectInput3"
+        id="VueSelectInput4"
         v-model="selectedValue"
-        name="VueSelectInput3"
+        name="VueSelectInput5"
         :options="optionsList"
         label="Choose option"
         color="dodgerblue"
@@ -55,9 +55,9 @@
       />
 
       <VueSelectInputUi
-        id="VueSelectInput4"
+        id="VueSelectInput5"
         v-model="selectedValue"
-        name="VueSelectInput4"
+        name="VueSelectInput5"
         :options="optionsList"
         label="Disabled input"
         color="orangered"

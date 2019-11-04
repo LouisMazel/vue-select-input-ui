@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="parent"
+    ref="VueSelectInputUi"
     v-click-outside="closeList"
     :class="[{
       'is-focused': isFocus,
@@ -11,8 +11,6 @@
       'is-dark': dark
     }, size]"
     class="select-input-ui"
-    @click="openList"
-    @keydown="keyboardNav"
   >
     <input
       :id="id"
@@ -25,11 +23,12 @@
       class="select-input-ui__input"
       readonly
       @focus="openList"
+      @keydown="keyboardNav"
       @click="$emit('click')"
     >
     <div
       class="select-input-ui__toggle"
-      @click="openList"
+      @click="focusInput"
     >
       <slot name="arrow">
         <div class="select-input-ui__toggle__arrow">
@@ -43,7 +42,6 @@
       :class="error ? 'text-danger' : null"
       :style="[colorStyle]"
       class="select-input-ui__label"
-      @click="openList"
     >
       {{ hint || label }}
     </label>
@@ -143,6 +141,15 @@
       }
     },
     methods: {
+      focusInput () {
+        this.$refs.SelectInputUiInput.focus()
+      },
+      blurInput (e) {
+        this.$nextTick(() => {
+          this.closeList()
+          this.$emit('blur')
+        })
+      },
       openList () {
         if (!this.disabled) {
           this.$emit('focus')
@@ -200,7 +207,6 @@
             this.query += e.key
             const resultIndex = this.options.findIndex(o => {
               this.tmpValue = o.value
-              console.log('o.label.toLowerCase()', o.value, o.label.toLowerCase().startsWith(this.query))
               return o.label.toLowerCase().startsWith(this.query)
             })
             if (resultIndex !== -1) {
@@ -214,13 +220,13 @@
 </script>
 
 <style lang="scss" scoped>
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
   .select-input-ui {
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
     position: relative;
 
     &__label {
@@ -228,7 +234,6 @@
       top: 3px;
       cursor: pointer;
       left: 11px;
-      -webkit-transform: translateY(25%);
       transform: translateY(25%);
       opacity: 0;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -247,7 +252,6 @@
       padding-right: 18px;
       padding-left: 10px;
       font-weight: 400;
-      -webkit-appearance: none;
       outline: none;
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 4px;
@@ -280,7 +284,6 @@
     &.has-value {
       .select-input-ui__label {
         opacity: 1;
-        -webkit-transform: translateY(0);
         transform: translateY(0);
         font-size: 11px;
       }
@@ -293,7 +296,6 @@
     &.has-hint {
       .select-input-ui__label {
         opacity: 1;
-        -webkit-transform: translateY(0);
         transform: translateY(0);
         font-size: 11px;
       }
@@ -387,37 +389,14 @@
         color: rgba(255, 255, 255, 0.7);
       }
 
-      &.is-disabled {
-        .select-input-ui__label,
-        .select-input-ui__input {
-          color: #424242;
-        }
-      }
-
-      ::-webkit-input-placeholder {
-        /* WebKit, Blink, Edge */
-        color: rgba(255, 255, 255, 0.7);
-      }
-
       :-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
         color: rgba(255, 255, 255, 0.7);
         opacity: 1;
       }
 
-      ::-moz-placeholder {
-        /* Mozilla Firefox 19+ */
-        color: rgba(255, 255, 255, 0.7);
-        opacity: 1;
-      }
-
       :-ms-input-placeholder {
         /* Internet Explorer 10-11 */
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      ::-ms-input-placeholder {
-        /* Microsoft Edge */
         color: rgba(255, 255, 255, 0.7);
       }
 
@@ -430,15 +409,15 @@
         .select-input-ui__input {
           border-color: #CCC;
           background-color: #F2F2F2;
+          color: #424242;
+        }
+
+        .select-input-ui__label {
+          color: #424242;
         }
 
         .select-input-ui__toggle__arrow {
           color: #888;
-        }
-
-        ::-webkit-input-placeholder {
-          /* WebKit, Blink, Edge */
-          color: #424242;
         }
 
         :-moz-placeholder {
