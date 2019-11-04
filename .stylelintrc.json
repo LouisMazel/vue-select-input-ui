@@ -16,6 +16,7 @@
     "order/order": [
 			"custom-properties",
 			"declarations"
-		]
+    ],
+    "no-descending-specificity": null
   }
 }

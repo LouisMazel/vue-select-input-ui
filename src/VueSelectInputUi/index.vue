@@ -107,7 +107,7 @@
       borderStyle () {
         const cond = (this.isFocus && !this.error) || this.valid
         const color = this.valid ? this.validColor : this.color
-        return cond ? { border: `1px solid ${color} !important` } : null
+        return cond ? { border: `1px solid ${color}` } : null
       },
       colorStyle () {
         const cond = this.isFocus || this.valid
@@ -364,6 +364,42 @@
       }
     }
 
+    &.lg {
+      .select-input-ui__input {
+        height: 48px;
+        min-height: 48px;
+        font-size: 16px;
+      }
+
+      .select-input-ui__label {
+        font-size: 14px;
+      }
+
+      &.has-value {
+        .select-input-ui__input {
+          padding-top: 18px;
+        }
+      }
+    }
+
+    &.sm {
+      .select-input-ui__input {
+        height: 36px;
+        min-height: 36px;
+        font-size: 12px;
+      }
+
+      .select-input-ui__label {
+        font-size: 10px;
+      }
+
+      &.has-value {
+        .select-input-ui__input {
+          padding-top: 12px;
+        }
+      }
+    }
+
     &.is-dark {
       .select-input-ui__label {
         color: rgba(255, 255, 255, 0.7);
@@ -426,61 +462,14 @@
           opacity: 1;
         }
 
-        ::-moz-placeholder {
-          /* Mozilla Firefox 19+ */
-          color: #424242;
-          opacity: 1;
-        }
-
         :-ms-input-placeholder {
           /* Internet Explorer 10-11 */
-          color: #424242;
-        }
-
-        ::-ms-input-placeholder {
-          /* Microsoft Edge */
           color: #424242;
         }
 
         ::placeholder {
           /* Most modern browsers support this now. */
           color: #424242;
-        }
-      }
-    }
-
-    &.sm {
-      .select-input-ui__input {
-        height: 36px;
-        min-height: 36px;
-        font-size: 12px;
-      }
-
-      .select-input-ui__label {
-        font-size: 10px;
-      }
-
-      &.has-value {
-        .select-input-ui__input {
-          padding-top: 12px;
-        }
-      }
-    }
-
-    &.lg {
-      .select-input-ui__input {
-        height: 48px;
-        min-height: 48px;
-        font-size: 16px;
-      }
-
-      .select-input-ui__label {
-        font-size: 14px;
-      }
-
-      &.has-value {
-        .select-input-ui__input {
-          padding-top: 18px;
         }
       }
     }
