@@ -101,18 +101,11 @@
       return {
         isFocus: false,
         selectedIndex: null,
-        query: ''
+        query: '',
+        tmpValue: this.value
       }
     },
     computed: {
-      tmpValue: {
-        get () {
-          return this.value
-        },
-        set (val) {
-          return val
-        }
-      },
       borderStyle () {
         const cond = (this.isFocus && !this.error) || this.valid
         const color = this.valid ? this.validColor : this.color
@@ -144,8 +137,10 @@
         return valueSelected ? valueSelected.label : null
       }
     },
-    mounted () {
-      this.$parent.$on('phone-number-focused', () => { this.isFocus = false })
+    watch: {
+      value (val) {
+        this.tmpValue = val
+      }
     },
     methods: {
       openList () {
@@ -205,6 +200,7 @@
             this.query += e.key
             const resultIndex = this.options.findIndex(o => {
               this.tmpValue = o.value
+              console.log('o.label.toLowerCase()', o.value, o.label.toLowerCase().startsWith(this.query))
               return o.label.toLowerCase().startsWith(this.query)
             })
             if (resultIndex !== -1) {
