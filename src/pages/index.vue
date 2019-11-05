@@ -32,11 +32,6 @@
           { label: 'Example 6', value: 'ex_6' }
         ]
       }
-    },
-    methods: {
-      onUpdate (payload) {
-        this.results = payload
-      }
     }
   }
 </script>
