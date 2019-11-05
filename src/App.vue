@@ -27,6 +27,7 @@
         class="mb-3"
         size="sm"
         required
+        valid
         :item-height="20"
       />
 

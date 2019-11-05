@@ -1,6 +1,6 @@
 {
   "name": "vue-select-input-ui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A select input component made with Vue JS",
   "author": "Louis Mazel <mazuel.loic@gmail.com>",
   "scripts": {

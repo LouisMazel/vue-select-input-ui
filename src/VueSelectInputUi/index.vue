@@ -85,7 +85,7 @@
     props: {
       itemHeight: { type: Number, default: 30 },
       value: { type: [String, Object], default: null },
-      label: { type: String, default: 'Select' },
+      label: { type: String, default: 'Select option' },
       hint: { type: String, default: String },
       size: { type: String, default: String },
       error: { type: Boolean, default: Boolean },
