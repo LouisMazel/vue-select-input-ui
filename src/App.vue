@@ -26,6 +26,7 @@
         color="yellowgreen"
         class="mb-3"
         size="sm"
+        required
         :item-height="20"
       />
 
@@ -51,6 +52,7 @@
         color="dodgerblue"
         class="mb-3"
         error
+        hint="Error message shown"
         :item-height="50"
       />
 
@@ -85,14 +87,15 @@
       return {
         selectedValue: null,
         optionsList: [
-          { label: 'Tout', value: 'all' },
-          { label: 'Nom client', value: 'from' },
-          { label: 'Depuis', value: 'platform' },
-          { label: 'Date de mise à jour', value: 'updated' },
-          { label: 'Date de mise à jour (décroissante)', value: '-updated' },
-          { label: `Date d'échéance`, value: 'due' },
-          { label: `Date d'échéance (décroissante)`, value: '-due' },
-          { label: 'Assigné à', value: 'assigned' }
+          { label: 'First option', value: 'first' },
+          { label: 'Second option', value: 'second' },
+          { label: 'Third option', value: 'third' },
+          { label: 'Example 1', value: 'ex_1' },
+          { label: 'Example 2', value: 'ex_2' },
+          { label: 'Example 3', value: 'ex_3' },
+          { label: 'Example 4', value: 'ex_4' },
+          { label: 'Example 5', value: 'ex_5' },
+          { label: 'Example 6', value: 'ex_6' }
         ]
       }
     }
