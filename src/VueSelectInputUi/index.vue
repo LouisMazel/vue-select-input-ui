@@ -16,10 +16,12 @@
     <input
       :id="id"
       ref="SelectInputUiInput"
+      v-bind="$attrs"
       :name="name"
-      :value="labelShown"
-      :placeholder="label"
+      :value="valueShown"
+      :placeholder="labelShown"
       :disabled="disabled"
+      :required="required"
       :style="[borderStyle]"
       class="select-input-ui__input"
       readonly
@@ -44,7 +46,7 @@
       :style="[colorStyle]"
       class="select-input-ui__label"
     >
-      {{ hint || label }}
+      {{ hintValue || labelShown }}
     </label>
     <Transition name="slide">
       <div
@@ -88,6 +90,7 @@
       size: { type: String, default: String },
       error: { type: Boolean, default: Boolean },
       disabled: { type: Boolean, default: false },
+      required: { type: Boolean, default: false },
       valid: { type: Boolean, default: false },
       validColor: { type: String, default: 'yellowgreen' },
       color: { type: String, default: String },
@@ -131,9 +134,19 @@
           ? this.options.findIndex(c => c.value === this.value)
           : null
       },
-      labelShown () {
+      valueShown () {
         const valueSelected = this.options.filter(c => c.value === this.value)[0]
         return valueSelected ? valueSelected.label : null
+      },
+      labelShown () {
+        let label = this.label
+        if (this.required && label) label += ` *`
+        return label
+      },
+      hintValue () {
+        let hint = this.hint
+        if (this.required && hint) hint += ` *`
+        return hint
       }
     },
     watch: {
@@ -217,6 +230,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import 'style-helpers';
+
   .select-input-ui {
     *,
     *::before,
@@ -224,6 +239,7 @@
       box-sizing: border-box;
     }
 
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     position: relative;
 
     &__label {
