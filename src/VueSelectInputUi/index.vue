@@ -242,6 +242,10 @@
     font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     position: relative;
 
+    height: 42px;
+    min-height: 42px;
+    position: relative;
+
     &__label {
       position: absolute;
       top: 3px;
@@ -378,6 +382,9 @@
     }
 
     &.lg {
+      height: 48px;
+      min-height: 48px;
+
       .select-input-ui__input {
         height: 48px;
         min-height: 48px;
@@ -396,6 +403,9 @@
     }
 
     &.sm {
+      height: 36px;
+      min-height: 36px;
+
       .select-input-ui__input {
         height: 36px;
         min-height: 36px;
