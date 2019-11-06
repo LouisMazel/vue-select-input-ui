@@ -1,6 +1,6 @@
 {
   "name": "vue-select-input-ui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A select input component made with Vue JS",
   "author": "Louis Mazel <mazuel.loic@gmail.com>",
   "scripts": {
@@ -27,7 +27,7 @@
   "dependencies": {
     "v-click-outside": "^2.0.2",
     "vue": "^2.6.10",
-    "style-helpers": "^0.2.3"
+    "style-helpers": "^0.2.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
