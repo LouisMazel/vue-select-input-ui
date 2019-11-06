@@ -241,10 +241,8 @@
 
     font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     position: relative;
-
     height: 42px;
     min-height: 42px;
-    position: relative;
 
     &__label {
       position: absolute;
