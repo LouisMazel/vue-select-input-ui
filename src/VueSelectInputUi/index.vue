@@ -356,10 +356,6 @@
       background-color: $bg-color;
       color: $second-color;
 
-      &__item.keyboard-selected {
-        background-color: $bg-color;
-      }
-
       &__item {
         padding: 0 10px;
         text-overflow: ellipsis;
@@ -406,7 +402,7 @@
 
     &.is-focused {
       .select-input-ui__toggle {
-        transform: rotate(-180deg);
+        transform: rotate(180deg);
       }
 
       .select-input-ui__input {
@@ -428,7 +424,7 @@
     &.is-disabled {
       cursor: not-allowed;
 
-      .vue-input-ui__input {
+      .select-input-ui__input {
         border-color: #CCC;
         background-color: #F2F2F2;
         color: $disabled-color;
@@ -458,9 +454,9 @@
         }
       }
 
-      .vue-input-ui__label,
-      .vue-input-ui__input,
-      .vue-input-ui__toggle__arrow {
+      .select-input-ui__label,
+      .select-input-ui__input,
+      .select-input-ui__toggle__arrow {
         cursor: not-allowed;
         color: $disabled-color;
       }
