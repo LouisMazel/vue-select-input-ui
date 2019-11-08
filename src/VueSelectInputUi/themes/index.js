@@ -1,8 +1,9 @@
-import ShadeColor from './ShadeColor'
+import { ShadeColor, HexToRgba, isColorName, colorNameToHex } from './ColorTransfomer'
 
 export default ({ dark, color, lightColor, darkColor, validColor, borderRadius }) => {
   return {
     '--primary-color': color,
+    '--primary-color-transparency': isColorName(color) ? HexToRgba(colorNameToHex(color), 0.7) : HexToRgba(color, 0.7),
     '--second-color': dark ? 'rgba(255, 255, 255, 0.7)' : '#747474',
     '--third-color': dark ? 'rgba(255, 255, 255, 0.7)' : '#CCC',
     '--bg-color': dark ? darkColor : lightColor,

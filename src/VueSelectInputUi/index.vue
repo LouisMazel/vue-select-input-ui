@@ -102,7 +102,7 @@
       required: { type: Boolean, default: false },
       valid: { type: Boolean, default: false },
       validColor: { type: String, default: 'yellowgreen' },
-      color: { type: String, default: null },
+      color: { type: String, default: 'dodgerblue' },
       dark: { type: Boolean, default: false },
       darkColor: { type: String, default: '#424242' },
       id: { type: String, default: 'VueSelectInputUi' },
@@ -248,6 +248,7 @@
   @import 'style-helpers';
 
   $primary-color: var(--primary-color);
+  $primary-color-transparency: var(--primary-color-transparency);
   $second-color: var(--second-color);
   $third-color: var(--third-color);
   $muted-color: var(--muted-color);
@@ -408,6 +409,7 @@
 
       .select-input-ui__input {
         border-color: $primary-color;
+        box-shadow: 0 0 0 0.2rem $primary-color-transparency;
       }
 
       .select-input-ui__label {
