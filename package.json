@@ -27,7 +27,7 @@
   "dependencies": {
     "v-click-outside": "^2.0.2",
     "vue": "^2.6.10",
-    "style-helpers": "^0.2.4"
+    "style-helpers": "^0.2.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",

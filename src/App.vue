@@ -45,6 +45,18 @@
       />
 
       <VueSelectInputUi
+        id="VueSelectInputBgDark"
+        v-model="selectedValue"
+        name="VueSelectInputBgDark"
+        :options="optionsList"
+        label="With different bg dark color"
+        color="dodgerblue"
+        dark-color="#21222e"
+        class="mb-3"
+        dark
+      />
+
+      <VueSelectInputUi
         id="VueSelectInput4"
         v-model="selectedValue"
         name="VueSelectInput5"
@@ -62,12 +74,23 @@
         v-model="selectedValue"
         name="VueSelectInput5"
         :options="optionsList"
-        label="Disabled input"
+        label="Disabled input dark"
         color="orangered"
         class="mb-3"
         disabled
         dark
         :item-height="60"
+      />
+
+      <VueSelectInputUi
+        id="VueSelectInputDisabledLight"
+        v-model="selectedValue"
+        name="VueSelectInputDisabledLight"
+        :options="optionsList"
+        label="Disabled input light"
+        class="mb-3"
+        disabled
+        :item-height="70"
       />
     </div>
     <p>
@@ -88,6 +111,7 @@
       return {
         selectedValue: null,
         optionsList: [
+          { label: 'None' },
           { label: 'First option', value: 'first' },
           { label: 'Second option', value: 'second' },
           { label: 'Third option', value: 'third' },

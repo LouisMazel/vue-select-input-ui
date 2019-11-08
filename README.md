@@ -89,7 +89,9 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 | hint (1)                    | String            | no       | -                           |
 | error (2)                   | Boolean           | no       | false                       |
 | color (3)                   | String (hex)      | no       | dodgerblue                  |
+| dark-color (4)                   | String (hex)      | no       | #424242                  |
 | item-height (4)                      | Int            | no       | 30        |
+| list-height                      | Int            | no       | 210        |
 | size                      | String ['sm', 'lg']           | no       | null        |
 | disabled                   | Boolean           | no       | false                       |
 | required                   | Boolean           | no       | false                       |
@@ -97,6 +99,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 | valid                   | Boolean           | no       | false                       |
 | validColor                   | String (hex)           | no       | false                       |
 | options (5)                   | String (hex)           | no       | false                       |
+| border-radius                   | Number           | no       | 4                       |
 
 (1) hint : Is a text that replaces the label/placeholder (Ex : Error designation)
 
@@ -110,11 +113,13 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 
 ```js
 [
+  { label: 'None' },
   { label: 'First option', value: 'first' },
   { label: 'Second option', value: 'second' },
   { label: 'Third option', value: 'third' }
 ]
 ```
+
 # Feature list
 
 - You can search the option on taping the label

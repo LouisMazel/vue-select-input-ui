@@ -11,6 +11,7 @@
       'is-dark': dark
     }, size]"
     class="select-input-ui"
+    :style="[colorVars]"
     @click="focusInput"
   >
     <input
@@ -22,7 +23,6 @@
       :placeholder="labelShown"
       :disabled="disabled"
       :required="required"
-      :style="[borderStyle]"
       class="select-input-ui__input"
       readonly
       @focus="openList"
@@ -43,7 +43,6 @@
       ref="label"
       :for="id"
       :class="error ? 'text-danger' : null"
-      :style="[colorStyle]"
       class="select-input-ui__label"
     >
       {{ hintValue || labelShown }}
@@ -53,6 +52,7 @@
         v-show="isFocus"
         ref="optionsList"
         class="select-input-ui__options-list"
+        :style="[itemListHeight]"
       >
         <div
           v-for="({ label: l, value: v }, i) in options"
@@ -62,10 +62,15 @@
             {'keyboard-selected': tmpValue === v}
           ]"
           class="flex align-center select-input-ui__options-list__item"
-          :style="[value === v ? bgStyle : null, optionHeight]"
+          :style="[optionHeight]"
           @click.stop="updateValue(v)"
         >
-          <div class="dots-text">
+          <div
+            class="dots-text"
+            :class="{
+              'text-muted': !v
+            }"
+          >
             {{ l }}
           </div>
         </div>
@@ -77,6 +82,8 @@
 <script>
   import { directive } from 'v-click-outside'
 
+  import getTheme from './themes'
+
   export default {
     name: 'VueSelectInputUi',
     directives: {
@@ -84,17 +91,20 @@
     },
     props: {
       itemHeight: { type: Number, default: 30 },
+      listHeight: { type: Number, default: 210 },
+      borderRadius: { type: Number, default: 4 },
       value: { type: [String, Object], default: null },
       label: { type: String, default: 'Select option' },
-      hint: { type: String, default: String },
-      size: { type: String, default: String },
+      hint: { type: String, default: null },
+      size: { type: String, default: null },
       error: { type: Boolean, default: Boolean },
       disabled: { type: Boolean, default: false },
       required: { type: Boolean, default: false },
       valid: { type: Boolean, default: false },
       validColor: { type: String, default: 'yellowgreen' },
-      color: { type: String, default: String },
+      color: { type: String, default: null },
       dark: { type: Boolean, default: false },
+      darkColor: { type: String, default: '#424242' },
       id: { type: String, default: 'VueSelectInputUi' },
       name: { type: String, default: 'VueSelectInputUi' },
       options: { type: Array, default: Array, required: true }
@@ -108,22 +118,27 @@
       }
     },
     computed: {
-      borderStyle () {
-        const cond = (this.isFocus && !this.error) || this.valid
-        const color = this.valid ? this.validColor : this.color
-        return cond ? { border: `1px solid ${color}` } : null
-      },
-      colorStyle () {
-        const cond = this.isFocus || this.valid
-        const color = this.valid ? this.validColor : this.color
-        return cond ? { color: `${color}` } : null
-      },
-      bgStyle () {
-        return { backgroundColor: `${this.color}` }
+      colorVars () {
+        const { dark, color, darkColor, validColor, borderRadius } = this
+        return getTheme(
+          {
+            dark,
+            color,
+            darkColor,
+            validColor,
+            borderRadius,
+            lightColor: '#FFFFFF'
+          }
+        )
       },
       optionHeight () {
         return {
           height: `${this.itemHeight}px`
+        }
+      },
+      itemListHeight () {
+        return {
+          maxHeight: `${this.listHeight}px`
         }
       },
       tmpValueIndex () {
@@ -174,7 +189,7 @@
       },
       updateValue (val) {
         this.tmpValue = val
-        this.$emit('input', val)
+        this.$emit('input', val || null)
         this.closeList()
       },
       scrollToSelectedOnFocus (arrayIndex) {
@@ -232,12 +247,20 @@
 <style lang="scss" scoped>
   @import 'style-helpers';
 
+  $primary-color: var(--primary-color);
+  $second-color: var(--second-color);
+  $third-color: var(--third-color);
+  $muted-color: var(--muted-color);
+  $hover-color: var(--hover-color);
+  $bg-color: var(--bg-color);
+  $border-radius: var(--border-radius);
+  $error-color: orangered;
+
+  .text-muted {
+    color: $muted-color;
+  }
+
   .select-input-ui {
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
 
     font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     position: relative;
@@ -253,13 +276,14 @@
       opacity: 0;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
       font-size: 11px;
-      color: rgba(0, 0, 0, 0.54);
+      color: $second-color;
     }
 
     &__input {
       cursor: pointer;
       background-color: transparent;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+      background-color: $bg-color;
       position: relative;
       width: 100%;
       height: 42px;
@@ -268,10 +292,34 @@
       padding-left: 10px;
       font-weight: 400;
       outline: none;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
+      border: 1px solid $third-color;
+      border-radius: $border-radius;
       font-size: 13px;
       z-index: 0;
+
+      &::-webkit-input-placeholder {
+        color: $second-color;
+      }
+
+      &::-moz-placeholder {
+        color: $second-color;
+      }
+
+      &:-ms-input-placeholder {
+        color: $second-color;
+      }
+
+      &::-ms-input-placeholder {
+        color: $second-color;
+      }
+
+      &:-moz-placeholder {
+        color: $second-color;
+      }
+
+      &::placeholder {
+        color: $second-color;
+      }
     }
 
     &__toggle {
@@ -284,30 +332,65 @@
       cursor: pointer;
 
       &__arrow {
-        color: #424242;
+        color: $second-color;
         font-size: 15px;
         transform: scaleY(0.5);
       }
     }
 
+    &__options-list {
+      padding: 0;
+      list-style: none;
+      min-width: 230px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 9;
+      margin: 0;
+      max-width: 100%;
+      position: absolute;
+      top: 100%;
+      border-radius: $border-radius;
+      width: 100%;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      background-color: $bg-color;
+      color: $second-color;
+
+      &__item:hover,
+      &__item.keyboard-selected {
+        background-color: $bg-color;
+      }
+
+      &__item {
+        padding: 0 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 12px;
+        cursor: pointer;
+
+        &:hover,
+        &.keyboard-selected {
+          background-color: $hover-color;
+        }
+
+        &.selected {
+          color: #FFF;
+          background-color: $primary-color;
+          font-weight: 600;
+        }
+      }
+    }
+
     &.has-error {
       .select-input-ui__input {
-        border-color: orangered !important;
+        border-color: $error-color;
       }
-    }
-
-    &.has-value {
       .select-input-ui__label {
-        opacity: 1;
-        transform: translateY(0);
-        font-size: 11px;
-      }
-
-      .select-input-ui__input {
-        padding-top: 14px;
+        color: $error-color;
       }
     }
 
+    &.has-value,
     &.has-hint {
       .select-input-ui__label {
         opacity: 1;
@@ -324,58 +407,58 @@
       .select-input-ui__toggle {
         transform: rotate(-180deg);
       }
+      .select-input-ui__input {
+        border-color: $primary-color;
+      }
+      .select-input-ui__label {
+        color: $primary-color;
+      }
+    }
+
+    &.is-dark:not(.is-disabled) {
+      .select-input-ui__input {
+        color: $second-color;
+      }
     }
 
     &.is-disabled {
+      cursor: not-allowed;
+
       .select-input-ui__input {
         border-color: #CCC;
         background-color: #F2F2F2;
+        color: #747474;
+
+        &::-webkit-input-placeholder {
+          color: #747474;
+        }
+
+        &::-moz-placeholder {
+          color: #747474;
+        }
+
+        &:-ms-input-placeholder {
+          color: #747474;
+        }
+
+        &::-ms-input-placeholder {
+          color: #747474;
+        }
+
+        &:-moz-placeholder {
+          color: #747474;
+        }
+
+        &::placeholder {
+          color: #747474;
+        }
       }
 
       .select-input-ui__label,
-      .select-input-ui__input {
-        cursor: default;
-      }
-    }
-
-    .text-danger {
-      color: orangered !important;
-    }
-
-    &__options-list {
-      padding: 0;
-      list-style: none;
-      background: #FFF;
-      max-height: 210px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      z-index: 9;
-      margin: 0;
-      max-width: 100%;
-      position: absolute;
-      top: 100%;
-      border-radius: 4px;
-      width: 100%;
-      min-width: 230px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-
-      &__item {
-        padding: 0 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        font-size: 12px;
-        cursor: pointer;
-
-        &:hover,
-        &.keyboard-selected {
-          background-color: #F2F2F2;
-        }
-
-        &.selected {
-          color: #FFF;
-          font-weight: 600;
-        }
+      .select-input-ui__input,
+      .select-input-ui__toggle__arrow {
+        cursor: not-allowed;
+        color: #747474;
       }
     }
 
@@ -417,80 +500,6 @@
       &.has-value {
         .select-input-ui__input {
           padding-top: 12px;
-        }
-      }
-    }
-
-    &.is-dark {
-      .select-input-ui__label {
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      .select-input-ui__input {
-        background-color: #424242;
-        border-color: rgba(255, 255, 255, 0.7);
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      .select-input-ui__options-list {
-        background-color: #424242;
-        color: rgba(255, 255, 255, 0.7);
-
-        &__item:hover,
-        &__item.keyboard-selected {
-          background-color: darken(#424242, 5%);
-        }
-      }
-
-      .select-input-ui__toggle__arrow {
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      :-moz-placeholder {
-        /* Mozilla Firefox 4 to 18 */
-        color: rgba(255, 255, 255, 0.7);
-        opacity: 1;
-      }
-
-      :-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      ::placeholder {
-        /* Most modern browsers support this now. */
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      &.is-disabled {
-        .select-input-ui__input {
-          border-color: #CCC;
-          background-color: #F2F2F2;
-          color: #424242;
-        }
-
-        .select-input-ui__label {
-          color: #424242;
-        }
-
-        .select-input-ui__toggle__arrow {
-          color: #888;
-        }
-
-        :-moz-placeholder {
-          /* Mozilla Firefox 4 to 18 */
-          color: #424242;
-          opacity: 1;
-        }
-
-        :-ms-input-placeholder {
-          /* Internet Explorer 10-11 */
-          color: #424242;
-        }
-
-        ::placeholder {
-          /* Most modern browsers support this now. */
-          color: #424242;
         }
       }
     }
