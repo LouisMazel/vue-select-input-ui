@@ -1,4 +1,4 @@
-import { ShadeColor, HexToRgba, isColorName, colorNameToHex } from './ColorTransfomer'
+import { ShadeColor, HexToRgba, isColorName, colorNameToHex } from '@/utils/ColorTransfomer'
 
 export default ({ dark, color, lightColor, darkColor, validColor, borderRadius }) => {
   return {
