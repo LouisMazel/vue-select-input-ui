@@ -254,8 +254,10 @@
   $muted-color: var(--muted-color);
   $hover-color: var(--hover-color);
   $bg-color: var(--bg-color);
+  $valid-color: var(--valid-color);
   $border-radius: var(--border-radius);
   $error-color: orangered;
+  $disabled-color: #747474;
 
   .text-muted {
     color: $muted-color;
@@ -426,41 +428,41 @@
     &.is-disabled {
       cursor: not-allowed;
 
-      .select-input-ui__input {
+      .vue-input-ui__input {
         border-color: #CCC;
         background-color: #F2F2F2;
-        color: #747474;
+        color: $disabled-color;
 
         &::-webkit-input-placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
 
         &::-moz-placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
 
         &:-ms-input-placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
 
         &::-ms-input-placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
 
         &:-moz-placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
 
         &::placeholder {
-          color: #747474;
+          color: $disabled-color;
         }
       }
 
-      .select-input-ui__label,
-      .select-input-ui__input,
-      .select-input-ui__toggle__arrow {
+      .vue-input-ui__label,
+      .vue-input-ui__input,
+      .vue-input-ui__toggle__arrow {
         cursor: not-allowed;
-        color: #747474;
+        color: $disabled-color;
       }
     }
 
