@@ -261,7 +261,6 @@
   }
 
   .select-input-ui {
-
     font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     position: relative;
     height: 42px;
@@ -281,7 +280,6 @@
 
     &__input {
       cursor: pointer;
-      background-color: transparent;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
       background-color: $bg-color;
       position: relative;
@@ -355,7 +353,6 @@
       background-color: $bg-color;
       color: $second-color;
 
-      &__item:hover,
       &__item.keyboard-selected {
         background-color: $bg-color;
       }
@@ -385,6 +382,7 @@
       .select-input-ui__input {
         border-color: $error-color;
       }
+
       .select-input-ui__label {
         color: $error-color;
       }
@@ -407,9 +405,11 @@
       .select-input-ui__toggle {
         transform: rotate(-180deg);
       }
+
       .select-input-ui__input {
         border-color: $primary-color;
       }
+
       .select-input-ui__label {
         color: $primary-color;
       }
