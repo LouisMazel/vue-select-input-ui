@@ -421,12 +421,14 @@
       .select-input-ui__label {
         color: $primary-color;
       }
+
       &.is-valid {
         .select-input-ui {
           &__input {
             border-color: $valid-color;
             box-shadow: 0 0 0 0.2rem $valid-color-transparency;
           }
+
           &__label {
             color: $valid-color;
           }
@@ -454,6 +456,7 @@
       .select-input-ui__input {
         color: #F2F2F2;
       }
+
       .select-input-ui__options-list__item {
         color: $second-color;
       }
