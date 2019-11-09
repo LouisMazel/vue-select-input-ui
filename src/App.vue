@@ -92,6 +92,16 @@
         disabled
         :item-height="70"
       />
+
+      <VueSelectInputUi
+        id="VueSelectInputValid"
+        v-model="selectedValue"
+        name="VueSelectInputValid"
+        :options="optionsList"
+        label="Valid input"
+        class="mb-3"
+        valid
+      />
     </div>
     <p>
       Value selected : {{ selectedValue || 'null' }}
@@ -127,7 +137,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import './assets/scss/main.scss';
   @import 'style-helpers';
 

@@ -1,17 +1,19 @@
 <template>
   <div
+    :id="uniqueId"
     ref="VueSelectInputUi"
     v-click-outside="closeList"
+    :style="[cssTheme]"
     :class="[{
       'is-focused': isFocus,
       'has-value': value,
       'has-hint': hint,
       'has-error': error,
       'is-disabled': disabled,
-      'is-dark': dark
+      'is-dark': dark,
+      'is-valid': valid
     }, size]"
     class="select-input-ui"
-    :style="[colorVars]"
     @click="focusInput"
   >
     <input
@@ -81,6 +83,7 @@
 
 <script>
   import { directive } from 'v-click-outside'
+  import cssVars from 'css-vars-ponyfill'
 
   import getTheme from './themes'
 
@@ -118,7 +121,10 @@
       }
     },
     computed: {
-      colorVars () {
+      uniqueId () {
+        return `${this.id}-${this._uid}`
+      },
+      cssTheme () {
         const { dark, color, darkColor, validColor, borderRadius } = this
         return getTheme(
           {
@@ -167,9 +173,20 @@
     watch: {
       value (val) {
         this.tmpValue = val
+      },
+      dark () {
+        this.setCssVars()
       }
     },
+    mounted () {
+      this.setCssVars()
+    },
     methods: {
+      setCssVars () {
+        cssVars({
+          variables: this.cssTheme
+        })
+      },
       focusInput () {
         this.$refs.SelectInputUiInput.focus()
       },
@@ -248,7 +265,6 @@
   @import 'style-helpers';
 
   $primary-color: var(--primary-color);
-  $primary-color-transparency: var(--primary-color-transparency);
   $second-color: var(--second-color);
   $third-color: var(--third-color);
   $muted-color: var(--muted-color);
@@ -258,6 +274,9 @@
   $border-radius: var(--border-radius);
   $error-color: orangered;
   $disabled-color: #747474;
+  $primary-color-transparency: var(--primary-color-transparency);
+  $error-color-transparency: var(--error-color-transparency);
+  $valid-color-transparency: var(--valid-color-transparency);
 
   .text-muted {
     color: $muted-color;
@@ -297,7 +316,6 @@
       border-radius: $border-radius;
       font-size: 13px;
       z-index: 0;
-      color: $second-color;
 
       &::-webkit-input-placeholder {
         color: $second-color;
@@ -377,16 +395,6 @@
       }
     }
 
-    &.has-error {
-      .select-input-ui__input {
-        border-color: $error-color;
-      }
-
-      .select-input-ui__label {
-        color: $error-color;
-      }
-    }
-
     &.has-value,
     &.has-hint {
       .select-input-ui__label {
@@ -413,10 +421,40 @@
       .select-input-ui__label {
         color: $primary-color;
       }
+      &.is-valid {
+        .select-input-ui {
+          &__input {
+            border-color: $valid-color;
+            box-shadow: 0 0 0 0.2rem $valid-color-transparency;
+          }
+          &__label {
+            color: $valid-color;
+          }
+        }
+      }
+    }
+
+    &.has-error {
+      .select-input-ui__input {
+        border-color: $error-color;
+      }
+
+      &.is-focused {
+        .select-input-ui__input {
+          box-shadow: 0 0 0 0.2rem $error-color-transparency;
+        }
+      }
+
+      .select-input-ui__label {
+        color: $error-color;
+      }
     }
 
     &.is-dark:not(.is-disabled) {
       .select-input-ui__input {
+        color: #F2F2F2;
+      }
+      .select-input-ui__options-list__item {
         color: $second-color;
       }
     }

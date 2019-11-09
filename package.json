@@ -25,9 +25,10 @@
     "delete:reports": "npm run delete-docs-report && npm run delete-dist-report"
   },
   "dependencies": {
+    "css-vars-ponyfill": "^2.1.2",
+    "style-helpers": "^0.2.8",
     "v-click-outside": "^2.0.2",
-    "vue": "^2.6.10",
-    "style-helpers": "^0.2.8"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
