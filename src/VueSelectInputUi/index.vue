@@ -133,7 +133,8 @@
             darkColor,
             validColor,
             borderRadius,
-            lightColor: '#FFFFFF'
+            lightColor: '#FFFFFF',
+            errorColor: 'orangered'
           }
         )
       },
@@ -173,9 +174,6 @@
     watch: {
       value (val) {
         this.tmpValue = val
-      },
-      dark () {
-        this.setCssVars()
       }
     },
     mounted () {
@@ -264,22 +262,27 @@
 <style lang="scss" scoped>
   @import 'style-helpers';
 
-  $primary-color: var(--primary-color);
-  $second-color: var(--second-color);
-  $third-color: var(--third-color);
-  $muted-color: var(--muted-color);
-  $hover-color: var(--hover-color);
-  $bg-color: var(--bg-color);
-  $valid-color: var(--valid-color);
-  $border-radius: var(--border-radius);
-  $error-color: orangered;
+  $primary-color: var(--vue-select-input-ui-primary-color);
+  $second-color-light: var(--vue-select-input-ui-second-color-light);
+  $second-color-dark: var(--vue-select-input-ui-second-color-dark);
+  $third-color-light: var(--vue-select-input-ui-third-color-light);
+  $third-color-dark: var(--vue-select-input-ui-third-color-dark);
+  $muted-color-light: var(--vue-select-input-ui-muted-color-light);
+  $muted-color-dark: var(--vue-select-input-ui-muted-color-dark);
+  $hover-color-light: var(--vue-select-input-ui-hover-color-light);
+  $hover-color-dark: var(--vue-select-input-ui-hover-color-dark);
+  $bg-color-light: var(--vue-select-input-ui-bg-color-light);
+  $bg-color-dark: var(--vue-select-input-ui-bg-color-dark);
+  $valid-color: var(--vue-select-input-ui-valid-color);
+  $error-color: var(--vue-select-input-ui-error-color);
+  $error-color-transparency: var(--vue-select-input-ui-error-color-transparency);
+  $primary-color-transparency: var(--vue-select-input-ui-primary-color-transparency);
+  $valid-color-transparency: var(--vue-select-input-ui-valid-color-transparency);
+  $border-radius: var(--vue-select-input-ui-border-radius);
   $disabled-color: #747474;
-  $primary-color-transparency: var(--primary-color-transparency);
-  $error-color-transparency: var(--error-color-transparency);
-  $valid-color-transparency: var(--valid-color-transparency);
 
   .text-muted {
-    color: $muted-color;
+    color: $muted-color-light;
   }
 
   .select-input-ui {
@@ -297,13 +300,13 @@
       opacity: 0;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
       font-size: 11px;
-      color: $second-color;
+      color: $second-color-light;
     }
 
     &__input {
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-      background-color: $bg-color;
+      background-color: $bg-color-light;
       position: relative;
       width: 100%;
       height: 42px;
@@ -312,33 +315,33 @@
       padding-left: 10px;
       font-weight: 400;
       outline: none;
-      border: 1px solid $third-color;
+      border: 1px solid $third-color-light;
       border-radius: $border-radius;
       font-size: 13px;
       z-index: 0;
 
       &::-webkit-input-placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
 
       &::-moz-placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
 
       &:-ms-input-placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
 
       &::-ms-input-placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
 
       &:-moz-placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
 
       &::placeholder {
-        color: $second-color;
+        color: $second-color-light;
       }
     }
 
@@ -352,7 +355,7 @@
       cursor: pointer;
 
       &__arrow {
-        color: $second-color;
+        color: $second-color-light;
         font-size: 15px;
         transform: scaleY(0.5);
       }
@@ -372,7 +375,7 @@
       border-radius: $border-radius;
       width: 100%;
       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-      background-color: $bg-color;
+      background-color: $bg-color-light;
 
       &__item {
         padding: 0 10px;
@@ -384,13 +387,139 @@
 
         &:hover,
         &.keyboard-selected {
-          background-color: $hover-color;
+          background-color: $hover-color-light;
         }
 
         &.selected {
           color: #FFF;
           background-color: $primary-color;
           font-weight: 600;
+        }
+      }
+    }
+
+    &.is-dark {
+      .select-input-ui {
+
+        &__label {
+          color: $second-color-dark;
+        }
+
+        &__input {
+          background-color: $bg-color-dark;
+          border-color: $third-color-dark;
+          color: $second-color-dark;
+
+          &::-webkit-input-placeholder {
+            color: $second-color-dark;
+          }
+
+          &::-moz-placeholder {
+            color: $second-color-dark;
+          }
+
+          &:-ms-input-placeholder {
+            color: $second-color-dark;
+          }
+
+          &::-ms-input-placeholder {
+            color: $second-color-dark;
+          }
+
+          &:-moz-placeholder {
+            color: $second-color-dark;
+          }
+
+          &::placeholder {
+            color: $second-color-dark;
+          }
+        }
+
+        &__toggle {
+          &__arrow {
+            color: $second-color-dark;
+          }
+        }
+
+        &__options-list {
+          background-color: $bg-color-dark;
+
+          &__item {
+            color: $second-color-dark;
+
+            &:hover,
+            &.keyboard-selected {
+              background-color: $hover-color-dark;
+            }
+
+            &.selected {
+              color: #FFF;
+              background-color: $primary-color;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      &__label {
+        color: $second-color-dark;
+      }
+
+      &__input {
+        background-color: $bg-color-dark;
+        border-color: $third-color-dark;
+
+        &::-webkit-input-placeholder {
+          color: $second-color-dark;
+        }
+
+        &::-moz-placeholder {
+          color: $second-color-dark;
+        }
+
+        &:-ms-input-placeholder {
+          color: $second-color-dark;
+        }
+
+        &::-ms-input-placeholder {
+          color: $second-color-dark;
+        }
+
+        &:-moz-placeholder {
+          color: $second-color-dark;
+        }
+
+        &::placeholder {
+          color: $second-color-dark;
+        }
+      }
+
+      &__toggle {
+        &__arrow {
+          color: $second-color-dark;
+        }
+      }
+
+      &__options-list {
+        background-color: $bg-color-dark;
+
+        &__item {
+          padding: 0 10px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          font-size: 12px;
+          cursor: pointer;
+
+          &:hover,
+          &.keyboard-selected {
+            background-color: $hover-color-dark;
+          }
+
+          &.selected {
+            color: #FFF;
+            background-color: $primary-color;
+            font-weight: 600;
+          }
         }
       }
     }
@@ -449,16 +578,6 @@
 
       .select-input-ui__label {
         color: $error-color;
-      }
-    }
-
-    &.is-dark:not(.is-disabled) {
-      .select-input-ui__input {
-        color: #F2F2F2;
-      }
-
-      .select-input-ui__options-list__item {
-        color: $second-color;
       }
     }
 
