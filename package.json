@@ -1,6 +1,6 @@
 {
   "name": "vue-select-input-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A select input component made with Vue JS",
   "author": "Louis Mazel <mazuel.loic@gmail.com>",
   "scripts": {
@@ -39,6 +39,7 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "color-transformer-ui": "^0.0.3",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.13.0",
