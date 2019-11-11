@@ -400,7 +400,6 @@
 
     &.is-dark {
       .select-input-ui {
-
         &__label {
           color: $second-color-dark;
         }
@@ -460,6 +459,7 @@
           }
         }
       }
+
       &__label {
         color: $second-color-dark;
       }
