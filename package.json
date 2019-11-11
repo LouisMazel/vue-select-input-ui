@@ -12,7 +12,7 @@
     "lint:style": "stylelint 'src/**/*.scss' 'src/**/*.vue'",
     "lint:style:fix": "stylelint 'src/**/*.scss' 'src/**/*.vue' --fix",
     "lint:fix": "eslint --ext .js,.vue src",
-    "before-publish": "npm i && npm run lint && npm run build",
+    "before-publish": "npm audit && npm run lint && npm i && npm run build",
     "build:docs": "vue-cli-service build --dest docs --mode production",
     "build:lib": "vue-cli-service build --target lib ./src/VueSelectInputUi/index.vue",
     "publish-npm:beta": "npm publish --tag beta",
