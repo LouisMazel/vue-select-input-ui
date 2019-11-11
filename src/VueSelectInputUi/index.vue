@@ -550,19 +550,6 @@
       .select-input-ui__label {
         color: $primary-color;
       }
-
-      &.is-valid {
-        .select-input-ui {
-          &__input {
-            border-color: $valid-color;
-            box-shadow: 0 0 0 0.2rem $valid-color-transparency;
-          }
-
-          &__label {
-            color: $valid-color;
-          }
-        }
-      }
     }
 
     &.has-error {
@@ -578,6 +565,19 @@
 
       .select-input-ui__label {
         color: $error-color;
+      }
+    }
+
+    &.is-valid {
+      .select-input-ui {
+        &__input {
+          border-color: $valid-color;
+          box-shadow: 0 0 0 0.2rem $valid-color-transparency;
+        }
+
+        &__label {
+          color: $valid-color;
+        }
       }
     }
 
