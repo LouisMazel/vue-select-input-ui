@@ -1,16 +1,14 @@
-<!-- ![vue-select-input-ui](./assets/logo_sticky.png) -->
-
 # VueSelectInputUi
 
 > A vue component for select dates (range mode available) & time
 
 ![vue-select-input-ui](./assets/illu-animated.gif)
 
-# Demo
+## Demo
 
 [Enjoy](https://louismazel.github.io/vue-select-input-ui/)
 
-# Installation
+## Installation
 
 Yarn
 
@@ -24,9 +22,9 @@ NPM
 npm i --save vue-select-input-ui
 ```
 
-# Usage
+## Usage
 
-## ES6 Modules / CommonJS
+### ES6 Modules / CommonJS
 
 ```js
 import VueSelectInputUi from 'vue-select-input-ui';
@@ -46,7 +44,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
   />
 ```
 
-## UMD
+### UMD
 
 ```html
 <link
@@ -78,7 +76,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 </script>
 ```
 
-# Props API
+## Props API
 
 | Props           | Type                | Required | Default          |
 |-----------------|---------------------|----------|------------------|
@@ -120,7 +118,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 ]
 ```
 
-# Feature list
+## Feature list
 
 - You can search the option on taping the label
 - Keyboard accessibilty
@@ -128,7 +126,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 - Error state ui
 - Message error state ui
 
-# Events API
+## Events API
 
 | Event | Return                                |
 |-------|---------------------------------------|
@@ -137,7 +135,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 | focus | when the component is focused         |
 | blur  | when the component is blur            |
 
-# Keyboard Accessible
+## Keyboard Accessible
 
 | Key        | Action          |
 |------------|-----------------|
@@ -146,15 +144,13 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 | Escape     | Close list      |
 | Enter      | Select option   |
 
-# Upcoming features (Todo)
+## Upcoming features (Todo)
 
 - Position list (left, right, top, bottom)
 
-# Contribute
+## Contribute
 
 ## Setting up development server
-
-### Without Docker
 
 Ensure you have Node and npm in your machine. Minimal config is:
 
@@ -199,6 +195,6 @@ npm run lint
 
 Work in progress
 
-# License
+## License
 
 This project is licensed under [MIT License](http://en.wikipedia.org/wiki/MIT_License)
