@@ -1,7 +1,7 @@
 import { ShadeColor, HexToRgba, isColorName, colorNameToHex } from 'color-transformer-ui'
 
 export default ({ color, lightColor, darkColor, validColor, borderRadius, errorColor }) => {
-  return {
+  const theme = {
     '--vue-select-input-ui-primary-color': color,
     '--vue-select-input-ui-second-color-light': '#747474',
     '--vue-select-input-ui-second-color-dark': 'rgba(255, 255, 255, 0.7)',
@@ -20,4 +20,5 @@ export default ({ color, lightColor, darkColor, validColor, borderRadius, errorC
     '--vue-select-input-ui-valid-color-transparency': isColorName(validColor) ? HexToRgba(colorNameToHex(validColor), 0.7) : HexToRgba(validColor, 0.7),
     '--vue-select-input-ui-border-radius': `${borderRadius}px`
   }
+  return theme
 }
