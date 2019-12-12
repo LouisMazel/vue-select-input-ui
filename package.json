@@ -68,9 +68,9 @@
     "nuxt/"
   ],
   "bugs": {
-    "url": "https://github.com/chronotruck/vue-select-input-ui/issues"
+    "url": "https://github.com/louismazel/vue-select-input-ui/issues"
   },
-  "homepage": "https://github.com/chronotruck/vue-select-input-ui",
+  "homepage": "https://github.com/louismazel/vue-select-input-ui",
   "keywords": [
     "vue",
     "javascript",
@@ -84,7 +84,7 @@
   "main": "dist/vue-select-input-ui.common.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chronotruck/vue-select-input-ui.git"
+    "url": "git+https://github.com/louismazel/vue-select-input-ui.git"
   },
   "types": "dist/index.d.ts"
 }
