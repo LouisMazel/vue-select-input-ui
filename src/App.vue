@@ -1,11 +1,39 @@
 <template>
   <div
     id="app"
-    class="sidebar-ui flex align-center justify-content-center flex-direction-column"
+    class="flex align-center justify-center direction-column"
+    :class="{
+      'is-dark': dark
+    }"
   >
     <h1 class="mb-3">
       VueSelectInputUi
     </h1>
+    <div class="flex space-between mb-4">
+      <a
+        href="https://github.com/LouisMazel/vue-select-input-ui"
+        target="_blank"
+        class="btn mr-2"
+        :class="[dark ? 'btn--white' : 'btn--black']"
+      >
+        GITHUB
+      </a>
+      <a
+        href="http://npmjs.com/package/vue-select-input-ui"
+        target="_blank"
+        class="btn btn--danger mr-2"
+      >
+        NPM
+      </a>
+    </div>
+    <div class="flex flex-center mb-4">
+      <button
+        class="btn mr-2"
+        @click="dark = !dark"
+      >
+        TOGGLE DARK MODE
+      </button>
+    </div>
     <div class="container">
       <VueSelectInputUi
         id="VueSelectInput2"
@@ -15,7 +43,26 @@
         label="Choose option"
         color="dodgerblue"
         class="mb-3"
+        :dark="dark"
       />
+
+      <VueSelectInputUi
+        id="VueSelectInput3"
+        v-model="selectedValue"
+        name="VueSelectInput3"
+        :options="optionsList"
+        label="Custom item template"
+        color="purple"
+        class="mb-3"
+        size="lg"
+        :item-height="40"
+        :border-radius="4"
+        :dark="dark"
+      >
+        <template v-slot="{ option }">
+          <p>{{ option.label }} = {{ option.value }}</p>
+        </template>
+      </VueSelectInputUi>
 
       <VueSelectInputUi
         id="VueSelectInput1"
@@ -28,19 +75,7 @@
         size="sm"
         required
         :item-height="20"
-      />
-
-      <VueSelectInputUi
-        id="VueSelectInput3"
-        v-model="selectedValue"
-        name="VueSelectInput3"
-        :options="optionsList"
-        label="Choose option"
-        color="purple"
-        class="mb-3"
-        size="lg"
-        dark
-        :item-height="40"
+        :dark="dark"
       />
 
       <VueSelectInputUi
@@ -52,7 +87,8 @@
         color="dodgerblue"
         dark-color="#21222e"
         class="mb-3"
-        dark
+        :border-radius="16"
+        :dark="dark"
       />
 
       <VueSelectInputUi
@@ -66,6 +102,7 @@
         error
         hint="Error message shown"
         :item-height="50"
+        :dark="dark"
       />
 
       <VueSelectInputUi
@@ -77,8 +114,8 @@
         color="orangered"
         class="mb-3"
         disabled
-        dark
         :item-height="60"
+        :dark="dark"
       />
 
       <VueSelectInputUi
@@ -90,6 +127,7 @@
         class="mb-3"
         disabled
         :item-height="70"
+        :dark="dark"
       />
 
       <VueSelectInputUi
@@ -100,6 +138,7 @@
         label="Valid input"
         class="mb-3"
         valid
+        :dark="dark"
       />
     </div>
     <p>
@@ -118,6 +157,7 @@
     },
     data () {
       return {
+        dark: false,
         selectedValue: null,
         optionsList: [
           { label: 'None' },
@@ -136,13 +176,24 @@
   }
 </script>
 
+<style lang="scss">
+  @import './scss/main.scss';
+</style>
+
 <style lang="scss" scoped>
-  @import './assets/scss/main.scss';
   @import 'style-helpers';
 
   #app {
     .container {
       width: 300px;
+    }
+
+    &.is-dark {
+      background-color: black;
+
+      h1 {
+        color: white;
+      }
     }
   }
 </style>
