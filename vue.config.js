@@ -5,5 +5,11 @@ module.exports = {
     }
   },
   publicPath: './',
-  lintOnSave: undefined
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/scss/vars.scss";`
+      }
+    }
+  }
 }

@@ -97,7 +97,7 @@ Vue.component('VueSelectInputUi', VueSelectInputUi);
 | valid           | Boolean             | no       | false            |
 | validColor      | String (hex)        | no       | false            |
 | options (5)     | String (hex)        | no       | false            |
-| border-radius   | Number              | no       | 4                |
+| border-radius   | Number              | no       | 8                |
 
 (1) hint : Is a text that replaces the label/placeholder (Ex : Error designation)
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-select-input-ui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A select input component made with Vue JS",
   "author": "Louis Mazel <mazuel.loic@gmail.com>",
   "scripts": {
@@ -25,9 +25,8 @@
     "delete:reports": "npm run delete-docs-report && npm run delete-dist-report"
   },
   "dependencies": {
-    "css-vars-ponyfill": "^2.1.2",
-    "style-helpers": "^0.2.8",
-    "v-click-outside": "^2.0.2",
+    "color-transformer-ui": "0.0.6",
+    "style-helpers": "^1.0.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -39,7 +38,6 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
-    "color-transformer-ui": "^0.0.3",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.13.1",
